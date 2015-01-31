@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		974694701A7D87D300011A07 /* GameOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 9746946F1A7D87D300011A07 /* GameOver.m */; };
 		97EE54071A7D6B6B00018DFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EE54061A7D6B6B00018DFC /* main.m */; };
 		97EE540A1A7D6B6B00018DFC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EE54091A7D6B6B00018DFC /* AppDelegate.m */; };
 		97EE540D1A7D6B6B00018DFC /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EE540C1A7D6B6B00018DFC /* GameScene.m */; };
@@ -29,6 +30,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9746946E1A7D87D300011A07 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
+		9746946F1A7D87D300011A07 /* GameOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOver.m; sourceTree = "<group>"; };
 		97EE54011A7D6B6B00018DFC /* Spaceship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spaceship.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97EE54051A7D6B6B00018DFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97EE54061A7D6B6B00018DFC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -90,6 +93,8 @@
 				97EE54091A7D6B6B00018DFC /* AppDelegate.m */,
 				97EE540B1A7D6B6B00018DFC /* GameScene.h */,
 				97EE540C1A7D6B6B00018DFC /* GameScene.m */,
+				9746946E1A7D87D300011A07 /* GameOver.h */,
+				9746946F1A7D87D300011A07 /* GameOver.m */,
 				97EE540E1A7D6B6B00018DFC /* GameScene.sks */,
 				97EE54101A7D6B6B00018DFC /* GameViewController.h */,
 				97EE54111A7D6B6B00018DFC /* GameViewController.m */,
@@ -229,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97EE54121A7D6B6B00018DFC /* GameViewController.m in Sources */,
+				974694701A7D87D300011A07 /* GameOver.m in Sources */,
 				97EE540A1A7D6B6B00018DFC /* AppDelegate.m in Sources */,
 				97EE540D1A7D6B6B00018DFC /* GameScene.m in Sources */,
 				97EE54071A7D6B6B00018DFC /* main.m in Sources */,
@@ -422,6 +428,7 @@
 				97EE542B1A7D6B6C00018DFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		97EE542C1A7D6B6C00018DFC /* Build configuration list for PBXNativeTarget "SpaceshipTests" */ = {
 			isa = XCConfigurationList;
@@ -430,6 +437,7 @@
 				97EE542E1A7D6B6C00018DFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

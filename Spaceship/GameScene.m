@@ -23,10 +23,10 @@ static const UInt32 meteorCategory = 0x1 << 1;
     self.ship = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
     self.ship.xScale = 0.2;
     self.ship.yScale = 0.2;
-    self.ship.position = CGPointMake(CGRectGetMidX(self.frame),
-                                     100);
+    self.ship.position = CGPointMake(CGRectGetMidX(self.frame), 100);
     self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.size];
     self.ship.physicsBody.dynamic = NO;
+    self.ship.physicsBody.categoryBitMask = shipCategory;  
     [self addChild:self.ship];
 }
 
@@ -35,7 +35,7 @@ static const UInt32 meteorCategory = 0x1 << 1;
     self.meteor.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.meteor.size.width/2];
     self.meteor.physicsBody.linearDamping = 0;
     self.meteor.position = CGPointMake(self.ship.position.x, self.ship.position.y + 600);
-    
+    self.meteor.physicsBody.categoryBitMask = meteorCategory;
     [self addChild:self.meteor];
     
     CGVector push = CGVectorMake(0,-9.8);
@@ -48,8 +48,8 @@ static const UInt32 meteorCategory = 0x1 << 1;
     self.physicsWorld.gravity = CGVectorMake(0,-0.1);
     
     [self addShip];
-    
     [self addMeteor];
+    
     self.count = 0;
 }
 

@@ -10,11 +10,15 @@
 @interface GameScene()
 @property SKSpriteNode *ship;
 @property SKSpriteNode *meteor;
+@property int count;
 @end
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
+    
+    self.physicsWorld.gravity = CGVectorMake(0,-0.1);
+    
     self.ship = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
     self.ship.xScale = 0.2;
     self.ship.yScale = 0.2;
@@ -26,8 +30,14 @@
     
     self.meteor = [SKSpriteNode spriteNodeWithImageNamed:@"Meteor"];
     self.meteor.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.meteor.size.width/2];
+    self.meteor.physicsBody.linearDamping = 0;
     self.meteor.position = CGPointMake(self.ship.position.x, self.ship.position.y + 600);
+    
     [self addChild:self.meteor];
+    
+    CGVector push = CGVectorMake(0,-9.8);
+    [self.meteor.physicsBody applyImpulse:push];
+    self.count = 0;
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -50,6 +60,16 @@
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+   // NSLog(@"meteor.y: %g",self.meteor.position.y);
+    if(self.meteor.position.y < 0)
+    {
+        self.count++;
+        int range = self.size.width - self.meteor.size.width;
+        int offset = self.meteor.size.width/2;
+        //self.meteor.physicsBody.velocity = CGVectorMake(0, self.meteor.physicsBody.velocity.dy*1.1);
+        self.meteor.position = CGPointMake(rand() % range + offset, self.frame.size.height +100);
+        NSLog(@"New velocity: %g", self.meteor.physicsBody.velocity.dy);
+    }
 }
 
 @end

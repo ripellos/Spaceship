@@ -12,22 +12,25 @@
 @property SKSpriteNode *meteor;
 @property int count;
 @end
+
+static const UInt32 shipCategory = 0x1;
+static const UInt32 meteorCategory = 0x1 << 1;
+
 @implementation GameScene
 
--(void)didMoveToView:(SKView *)view {
-    /* Setup your scene here */
-    
-    self.physicsWorld.gravity = CGVectorMake(0,-0.1);
-    
+
+- (void)addShip {
     self.ship = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
     self.ship.xScale = 0.2;
     self.ship.yScale = 0.2;
     self.ship.position = CGPointMake(CGRectGetMidX(self.frame),
-                                   100);
+                                     100);
     self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.size];
     self.ship.physicsBody.dynamic = NO;
     [self addChild:self.ship];
-    
+}
+
+- (void)addMeteor {
     self.meteor = [SKSpriteNode spriteNodeWithImageNamed:@"Meteor"];
     self.meteor.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.meteor.size.width/2];
     self.meteor.physicsBody.linearDamping = 0;
@@ -37,6 +40,16 @@
     
     CGVector push = CGVectorMake(0,-9.8);
     [self.meteor.physicsBody applyImpulse:push];
+}
+
+-(void)didMoveToView:(SKView *)view {
+    /* Setup your scene here */
+    
+    self.physicsWorld.gravity = CGVectorMake(0,-0.1);
+    
+    [self addShip];
+    
+    [self addMeteor];
     self.count = 0;
 }
 

@@ -7,6 +7,8 @@
 //
 
 #import "GameScene.h"
+#import "GameOver.h"
+
 @interface GameScene()
 @property SKSpriteNode *ship;
 @property SKSpriteNode *meteor;
@@ -21,7 +23,8 @@ static const UInt32 meteorCategory = 0x1 << 1;
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
-    //Prep next scene
+    GameOver *endScene = [GameOver sceneWithSize:self.size];
+    [self.view presentScene:endScene transition:[SKTransition doorsCloseVerticalWithDuration:1.0]];
 }
 - (void)addShip {
     self.ship = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
@@ -31,6 +34,7 @@ static const UInt32 meteorCategory = 0x1 << 1;
     self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.size];
     self.ship.physicsBody.dynamic = NO;
     self.ship.physicsBody.categoryBitMask = shipCategory;
+    self.ship.physicsBody.contactTestBitMask = meteorCategory;
     [self addChild:self.ship];
 }
 
@@ -55,17 +59,25 @@ static const UInt32 meteorCategory = 0x1 << 1;
     [self addChild:self.score];
 }
 
+-(instancetype)initWithSize:(CGSize)size
+{
+    if(self = [super initWithSize:size])
+    {
+        self.physicsWorld.gravity = CGVectorMake(0,-0.1);
+        self.physicsWorld.contactDelegate=self;
+        
+        [self addShip];
+        [self addMeteor];
+        [self addHUD];
+        
+        self.count = 0;
+    }
+    return self;
+}
 -(void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
     
-    self.physicsWorld.gravity = CGVectorMake(0,-0.1);
-    self.physicsWorld.contactDelegate=self;
-    
-    [self addShip];
-    [self addMeteor];
-    [self addHUD];
-    
-    self.count = 0;
+
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

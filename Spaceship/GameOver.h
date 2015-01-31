@@ -8,6 +8,6 @@
 
 #import "GameScene.h"
 
-@interface GameOver : GameScene
+@interface GameOver : SKScene
 
 @end

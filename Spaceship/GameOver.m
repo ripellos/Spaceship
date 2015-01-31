@@ -21,6 +21,15 @@
         gameOver.fontColor = [SKColor whiteColor];
         gameOver.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         [self addChild:gameOver];
+        
+        SKLabelNode *restart = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
+        restart.text = @"tap to try again!";
+        restart.fontColor = [SKColor whiteColor];
+        restart.fontSize = 22;
+        restart.position = CGPointMake(size.width/2, -300);
+        SKAction *slideUp = [SKAction moveToY:CGRectGetMidY(self.frame)-40 duration:0.7];
+        [restart runAction:slideUp];
+        [self addChild:restart];
     }
     return self;
 }

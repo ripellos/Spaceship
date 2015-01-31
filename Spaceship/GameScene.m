@@ -10,6 +10,7 @@
 @interface GameScene()
 @property SKSpriteNode *ship;
 @property SKSpriteNode *meteor;
+@property SKLabelNode *score;
 @property int count;
 @end
 
@@ -18,7 +19,10 @@ static const UInt32 meteorCategory = 0x1 << 1;
 
 @implementation GameScene
 
-
+-(void)didBeginContact:(SKPhysicsContact *)contact
+{
+    //Prep next scene
+}
 - (void)addShip {
     self.ship = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
     self.ship.xScale = 0.2;
@@ -26,7 +30,7 @@ static const UInt32 meteorCategory = 0x1 << 1;
     self.ship.position = CGPointMake(CGRectGetMidX(self.frame), 100);
     self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.size];
     self.ship.physicsBody.dynamic = NO;
-    self.ship.physicsBody.categoryBitMask = shipCategory;  
+    self.ship.physicsBody.categoryBitMask = shipCategory;
     [self addChild:self.ship];
 }
 
@@ -42,13 +46,25 @@ static const UInt32 meteorCategory = 0x1 << 1;
     [self.meteor.physicsBody applyImpulse:push];
 }
 
+-(void)addHUD{
+    self.score = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
+    self.score.text = [NSString stringWithFormat:@"Meteors dodged: %i",self.count];
+    self.score.fontColor = [SKColor whiteColor];
+    self.score.fontSize = 20;
+   // score.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+    self.score.position = CGPointMake(self.frame.size.width - self.score.frame.size.width/2 - 20, self.frame.size.height - self.score.frame.size.height/2 -20);
+    [self addChild:self.score];
+}
+
 -(void)didMoveToView:(SKView *)view {
     /* Setup your scene here */
     
     self.physicsWorld.gravity = CGVectorMake(0,-0.1);
+    self.physicsWorld.contactDelegate=self;
     
     [self addShip];
     [self addMeteor];
+    [self addHUD];
     
     self.count = 0;
 }

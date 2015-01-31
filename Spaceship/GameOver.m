@@ -19,7 +19,7 @@
         gameOver.text = @"GAME OVER";
         gameOver.fontSize = 44;
         gameOver.fontColor = [SKColor whiteColor];
-        gameOver.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
+        gameOver.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+5);
         [self addChild:gameOver];
         
         SKLabelNode *restart = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];

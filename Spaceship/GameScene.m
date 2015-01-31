@@ -51,7 +51,6 @@ static const UInt32 meteorCategory = 0x1 << 1;
     self.score.text = [NSString stringWithFormat:@"Meteors dodged: %i",self.count];
     self.score.fontColor = [SKColor whiteColor];
     self.score.fontSize = 20;
-   // score.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
     self.score.position = CGPointMake(self.frame.size.width - self.score.frame.size.width/2 - 20, self.frame.size.height - self.score.frame.size.height/2 -20);
     [self addChild:self.score];
 }
@@ -97,7 +96,7 @@ static const UInt32 meteorCategory = 0x1 << 1;
         int offset = self.meteor.size.width/2;
         //self.meteor.physicsBody.velocity = CGVectorMake(0, self.meteor.physicsBody.velocity.dy*1.1);
         self.meteor.position = CGPointMake(rand() % range + offset, self.frame.size.height +100);
-        NSLog(@"New velocity: %g", self.meteor.physicsBody.velocity.dy);
+        self.score.text = [NSString stringWithFormat:@"Meteors Dodged: %i",self.count];
     }
 }
 

@@ -24,6 +24,8 @@ static const UInt32 meteorCategory = 0x1 << 1;
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
     GameOver *endScene = [GameOver sceneWithSize:self.size];
+    endScene.userData = [NSMutableDictionary dictionary];
+    [endScene.userData setObject:[NSNumber numberWithInt: self.count] forKey:@"score"];
     [self.view presentScene:endScene transition:[SKTransition doorsCloseVerticalWithDuration:1.0]];
 }
 - (void)addShip {

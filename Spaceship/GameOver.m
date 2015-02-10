@@ -30,10 +30,26 @@
         SKAction *slideUp = [SKAction moveToY:CGRectGetMidY(self.frame)-40 duration:0.7];
         [restart runAction:slideUp];
         [self addChild:restart];
+        [self saveScore];
     }
     return self;
 }
 
+-(void)saveScore
+{
+    if([self.userData objectForKey:@"score"] != nil)
+    {
+        id score = [self.userData objectForKey:@"score"];
+        if([score isKindOfClass:[NSNumber class]])
+        {
+            NSNumber *scoreValue = (NSNumber*)score;
+            SKLabelNode *score = [SKLabelNode labelNodeWithFontNamed:@"Future Medium"];
+            score.position = CGPointMake(self.size.width/2,self.size.height - 100);
+            score.text = [NSString stringWithFormat:@"Score: %@",scoreValue];
+            [self addChild:score];
+        }
+    }
+}
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     GameScene *newGame = [GameScene sceneWithSize:self.size];

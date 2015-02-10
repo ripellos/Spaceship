@@ -13,7 +13,7 @@
 {
     if(self = [super initWithSize:size])
     {
-        self.backgroundColor = [SKColor blackColor];
+        //self.backgroundColor = [SKColor blackColor];
         
         SKLabelNode *gameOver = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
         gameOver.text = @"GAME OVER";
@@ -32,5 +32,11 @@
         [self addChild:restart];
     }
     return self;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    GameScene *newGame = [GameScene sceneWithSize:self.size];
+    [self.view presentScene:newGame transition:[SKTransition doorsOpenVerticalWithDuration:0.9]];
 }
 @end

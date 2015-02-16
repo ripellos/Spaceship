@@ -44,9 +44,35 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSArray *highscores = [defaults objectForKey:@"highscores"];
     NSArray *highscoreNames = [defaults objectForKey:@"highscoreNames"];
-    if(highscoreNames && highscoreNames)
+    NSString *highscoreText;
+    
+    if(highscoreNames && highscores)
     {
-        
+        for(int i=0; i<highscoreNames.count; i++)
+        {
+            NSString *highscoreLine = [NSString stringWithFormat:@"%@: %@\n", [highscoreNames objectAtIndex:i], [highscores objectAtIndex: i]];
+            highscoreText = [highscoreText stringByAppendingString:highscoreLine];
+        }
+        NSLog(@"%@",highscoreText);
+    }
+    else
+    {
+        NSMutableArray *highscores;
+        for(int i=10; i>0; i--)
+        {
+            [highscores addObject:[NSNumber numberWithInt:5*i]];
+        }
+        NSMutableArray *highscoreNames = [NSMutableArray arrayWithObjects:
+                                          @"Mal",
+                                          @"Jean-Luke",
+                                          @"Turanga",
+                                          @"",
+                                          @"",
+                                          @"",
+                                          @"",
+                                          @"",
+                                          @"",
+                                          @"", nil];
     }
 }
 -(void)addScore

@@ -39,6 +39,16 @@
     }
     return self;
 }
+-(void)showHighScore
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *highscores = [defaults objectForKey:@"highscores"];
+    NSArray *highscoreNames = [defaults objectForKey:@"highscoreNames"];
+    if(highscoreNames && highscoreNames)
+    {
+        
+    }
+}
 -(void)addScore
 {
     //NSNumber *scoreData = [self.userData objectForKey:@"score"];

@@ -8,6 +8,7 @@
 
 #import "GameScene.h"
 #import "GameOver.h"
+#import "GameViewController.h"
 
 @interface GameScene()
 @property SKSpriteNode *ship;
@@ -25,7 +26,10 @@ static const UInt32 meteorCategory = 0x1 << 1;
 {
     GameOver *endScene = [GameOver sceneWithSize:self.size];
     endScene.userData = [NSMutableDictionary dictionary];
-    [endScene.userData setObject:[NSNumber numberWithInt: self.count] forKey:@"score"];
+    [endScene.userData setObject:[NSNumber numberWithInt:self.count] forKey:@"score"];
+//    id rootView = self.view.window.rootViewController;
+//    if([rootView isKindOfClass:[GameViewController class]])
+//        ((GameViewController *)rootView).currentScore = self.count;
     [self.view presentScene:endScene transition:[SKTransition doorsCloseVerticalWithDuration:1.0]];
 }
 - (void)addShip {

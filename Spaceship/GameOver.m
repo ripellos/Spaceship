@@ -7,14 +7,19 @@
 //
 
 #import "GameOver.h"
+#import "GameViewController.h"
 
+@interface GameOver()
+@property BOOL scoreNeedsToBeAdded;
+@end
 @implementation GameOver
 -(instancetype)initWithSize:(CGSize)size
 {
     if(self = [super initWithSize:size])
     {
         //self.backgroundColor = [SKColor blackColor];
-        
+        self.scoreNeedsToBeAdded=YES;
+
         SKLabelNode *gameOver = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
         gameOver.text = @"GAME OVER";
         gameOver.fontSize = 44;
@@ -29,29 +34,28 @@
         restart.position = CGPointMake(size.width/2, -300);
         SKAction *slideUp = [SKAction moveToY:CGRectGetMidY(self.frame)-40 duration:0.7];
         [restart runAction:slideUp];
-        [self addChild:restart];
         
-        [self saveScore];
+        [self addChild:restart];
     }
     return self;
 }
-
--(void)saveScore
+-(void)addScore
 {
-    id score = [self.userData objectForKey:@"score"];
-    if([score isKindOfClass:[NSNumber class]])
-    {
-        self.userData = [NSMutableDictionary dictionary];
-        NSNumber *scoreValue = (NSNumber*)score;
-        SKLabelNode *score = [SKLabelNode labelNodeWithFontNamed:@"Future Medium"];
-        score.position = CGPointMake(self.size.width/2,self.size.height - 100);
-        score.text = [NSString stringWithFormat:@"Score: %@",scoreValue];
-        [self addChild:score];
-    }
+    //NSNumber *scoreData = [self.userData objectForKey:@"score"];
+    int currentScore = ((NSNumber*)[self.userData objectForKey:@"score"]).intValue;
+    SKLabelNode *scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
+    scoreLabel.text = [NSString stringWithFormat:@"Score: %i", currentScore];
+    scoreLabel.position = CGPointMake(self.size.width/2, self.size.height -100);
+    scoreLabel.fontColor = [SKColor whiteColor];
+    [self addChild:scoreLabel];
 }
 -(void)update:(NSTimeInterval)currentTime
 {
-    
+    if(self.scoreNeedsToBeAdded)
+    {
+        self.scoreNeedsToBeAdded=NO;
+        [self addScore];
+    }
 }
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {

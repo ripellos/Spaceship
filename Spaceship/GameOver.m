@@ -11,20 +11,21 @@
 
 @interface GameOver()
 @property BOOL scoreNeedsToBeAdded;
+@property int userScore;
 @end
 @implementation GameOver
 -(instancetype)initWithSize:(CGSize)size
 {
     if(self = [super initWithSize:size])
     {
-        //self.backgroundColor = [SKColor blackColor];
+        self.backgroundColor = [SKColor blackColor];
         self.scoreNeedsToBeAdded=YES;
 
         SKLabelNode *gameOver = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
         gameOver.text = @"GAME OVER";
         gameOver.fontSize = 44;
         gameOver.fontColor = [SKColor whiteColor];
-        gameOver.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)+5);
+        gameOver.position = CGPointMake(CGRectGetMidX(self.frame), 200);
         [self addChild:gameOver];
         
         SKLabelNode *restart = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
@@ -32,56 +33,72 @@
         restart.fontColor = [SKColor whiteColor];
         restart.fontSize = 22;
         restart.position = CGPointMake(size.width/2, -300);
-        SKAction *slideUp = [SKAction moveToY:CGRectGetMidY(self.frame)-40 duration:0.7];
+        SKAction *slideUp = [SKAction moveToY:160 duration:0.7];
         [restart runAction:slideUp];
         
         [self addChild:restart];
+        [self showHighScore];
     }
     return self;
 }
+- (void)postionScores:(NSArray *)highscores highscoreNames:(NSArray *)highscoreNames
+{
+    BOOL userScoreUsed = NO;
+    for(int i=0; i<highscoreNames.count; i++)
+    {
+        SKLabelNode *highscoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
+        highscoreLabel.fontSize=18;
+        highscoreLabel.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
+        NSString *highscoreLine = [NSString stringWithFormat:@"%@: %@\n", [highscoreNames objectAtIndex:i], [highscores objectAtIndex: i]];
+        highscoreLabel.text = highscoreLine;
+        highscoreLabel.position = CGPointMake(self.size.width/2 + 50, self.size.height - (90 + 22*i));
+        [self addChild:highscoreLabel];
+    }
+}
+
 -(void)showHighScore
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSArray *highscores = [defaults objectForKey:@"highscores"];
     NSArray *highscoreNames = [defaults objectForKey:@"highscoreNames"];
-    NSString *highscoreText;
     
-    if(highscoreNames && highscores)
+    if(!highscoreNames && !highscores)
     {
-        for(int i=0; i<highscoreNames.count; i++)
-        {
-            NSString *highscoreLine = [NSString stringWithFormat:@"%@: %@\n", [highscoreNames objectAtIndex:i], [highscores objectAtIndex: i]];
-            highscoreText = [highscoreText stringByAppendingString:highscoreLine];
-        }
-        NSLog(@"%@",highscoreText);
-    }
-    else
-    {
-        NSMutableArray *highscores;
+        //NSLog(@"Creating new highscore");
+        NSMutableArray *highscoresInitial = [NSMutableArray array];
         for(int i=10; i>0; i--)
         {
-            [highscores addObject:[NSNumber numberWithInt:5*i]];
+            [highscoresInitial addObject:[NSNumber numberWithInt:5*i]];
         }
-        NSMutableArray *highscoreNames = [NSMutableArray arrayWithObjects:
+        NSMutableArray *highscoreNamesInitial = [NSMutableArray arrayWithObjects:
                                           @"Mal",
                                           @"Jean-Luke",
                                           @"Turanga",
-                                          @"",
-                                          @"",
-                                          @"",
-                                          @"",
-                                          @"",
-                                          @"",
-                                          @"", nil];
+                                          @"Han",
+                                          @"Zehpod",
+                                          @"William",
+                                          @"Duck",
+                                          @"Horatio",
+                                          @"Jack",
+                                          @"Zapp", nil];
+        highscoreNames = [highscoreNamesInitial copy];
+        highscores = [highscoresInitial copy];
     }
+
+    [self postionScores:highscores highscoreNames:highscoreNames];
+    
+    //SKLabelNode *highscoreList = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
+    //NSLog(@"%@",highscoreText);
+    
 }
 -(void)addScore
 {
     //NSNumber *scoreData = [self.userData objectForKey:@"score"];
     int currentScore = ((NSNumber*)[self.userData objectForKey:@"score"]).intValue;
+    self.userScore = currentScore;
     SKLabelNode *scoreLabel = [SKLabelNode labelNodeWithFontNamed:@"Futura Medium"];
     scoreLabel.text = [NSString stringWithFormat:@"Score: %i", currentScore];
-    scoreLabel.position = CGPointMake(self.size.width/2, self.size.height -100);
+    scoreLabel.position = CGPointMake(self.size.width/2, self.size.height -60);
     scoreLabel.fontColor = [SKColor whiteColor];
     [self addChild:scoreLabel];
 }

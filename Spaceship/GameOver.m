@@ -61,7 +61,7 @@
     for (NSNumber *score in highscores) {
         if(score.intValue < self.userScore)
         {
-            currentIndex = [highscores indexOfObject:score];
+            currentIndex = (int)[highscores indexOfObject:score];
             break;
         }
     }

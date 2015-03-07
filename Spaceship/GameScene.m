@@ -37,10 +37,11 @@ static const UInt32 meteorCategory = 0x1 << 1;
     self.ship.xScale = 0.2;
     self.ship.yScale = 0.2;
     self.ship.position = CGPointMake(CGRectGetMidX(self.frame), 100);
-    self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.size];
+    self.ship.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.ship.size];//bodyWithTexture:self.ship.texture size:self.ship.size];
     self.ship.physicsBody.dynamic = NO;
+    
     self.ship.physicsBody.categoryBitMask = shipCategory;
-    self.ship.physicsBody.contactTestBitMask = meteorCategory;
+    //self.ship.physicsBody.contactTestBitMask = meteorCategory;
     [self addChild:self.ship];
 }
 
@@ -48,8 +49,11 @@ static const UInt32 meteorCategory = 0x1 << 1;
     self.meteor = [SKSpriteNode spriteNodeWithImageNamed:@"Meteor"];
     self.meteor.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:self.meteor.size.width/2];
     self.meteor.physicsBody.linearDamping = 0;
+    self.meteor.physicsBody.friction = 0;
     self.meteor.position = CGPointMake(self.ship.position.x, self.ship.position.y + 600);
+    
     self.meteor.physicsBody.categoryBitMask = meteorCategory;
+    self.meteor.physicsBody.contactTestBitMask = shipCategory;
     [self addChild:self.meteor];
     
     CGVector push = CGVectorMake(0,-9.8);

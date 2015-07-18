@@ -9,6 +9,7 @@
 #import "GameScene.h"
 #import "GameOver.h"
 #import "GameViewController.h"
+#import "NewHighScore.h"
 
 @interface GameScene()
 @property SKSpriteNode *ship;
@@ -24,7 +25,8 @@ static const UInt32 meteorCategory = 0x1 << 1;
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
-    GameOver *endScene = [GameOver sceneWithSize:self.size];
+    NewHighScore *endScene = [NewHighScore sceneWithSize:self.size];
+//    GameOver *endScene = [GameOver sceneWithSize:self.size];
     endScene.userData = [NSMutableDictionary dictionary];
     [endScene.userData setObject:[NSNumber numberWithInt:self.count] forKey:@"score"];
 //    id rootView = self.view.window.rootViewController;
@@ -37,7 +39,7 @@ static const UInt32 meteorCategory = 0x1 << 1;
     self.ship.xScale = 0.2;
     self.ship.yScale = 0.2;
     self.ship.position = CGPointMake(CGRectGetMidX(self.frame), 100);
-    self.ship.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:self.ship.size];//bodyWithTexture:self.ship.texture size:self.ship.size];
+    self.ship.physicsBody = [SKPhysicsBody bodyWithTexture:self.ship.texture size:self.ship.size];
     self.ship.physicsBody.dynamic = NO;
     
     self.ship.physicsBody.categoryBitMask = shipCategory;

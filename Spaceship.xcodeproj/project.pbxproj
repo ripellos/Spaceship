@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9723CF8A1AC2D42400C6F553 /* NewHighScore.m in Sources */ = {isa = PBXBuildFile; fileRef = 9723CF891AC2D42400C6F553 /* NewHighScore.m */; };
 		974694701A7D87D300011A07 /* GameOver.m in Sources */ = {isa = PBXBuildFile; fileRef = 9746946F1A7D87D300011A07 /* GameOver.m */; };
 		97EE54071A7D6B6B00018DFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EE54061A7D6B6B00018DFC /* main.m */; };
 		97EE540A1A7D6B6B00018DFC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EE54091A7D6B6B00018DFC /* AppDelegate.m */; };
@@ -30,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9723CF881AC2D42400C6F553 /* NewHighScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewHighScore.h; sourceTree = "<group>"; };
+		9723CF891AC2D42400C6F553 /* NewHighScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewHighScore.m; sourceTree = "<group>"; };
 		9746946E1A7D87D300011A07 /* GameOver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOver.h; sourceTree = "<group>"; };
 		9746946F1A7D87D300011A07 /* GameOver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOver.m; sourceTree = "<group>"; };
 		97EE54011A7D6B6B00018DFC /* Spaceship.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spaceship.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +105,8 @@
 				97EE54161A7D6B6B00018DFC /* Images.xcassets */,
 				97EE54181A7D6B6B00018DFC /* LaunchScreen.xib */,
 				97EE54041A7D6B6B00018DFC /* Supporting Files */,
+				9723CF881AC2D42400C6F553 /* NewHighScore.h */,
+				9723CF891AC2D42400C6F553 /* NewHighScore.m */,
 			);
 			path = Spaceship;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 				97EE54121A7D6B6B00018DFC /* GameViewController.m in Sources */,
 				974694701A7D87D300011A07 /* GameOver.m in Sources */,
 				97EE540A1A7D6B6B00018DFC /* AppDelegate.m in Sources */,
+				9723CF8A1AC2D42400C6F553 /* NewHighScore.m in Sources */,
 				97EE540D1A7D6B6B00018DFC /* GameScene.m in Sources */,
 				97EE54071A7D6B6B00018DFC /* main.m in Sources */,
 			);
@@ -361,9 +367,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Spaceship/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -372,9 +380,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Spaceship/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
